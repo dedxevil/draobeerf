@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-spotify-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freeboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['var(--font-sans)', 'sans-serif'],
+          },
+          colors: {
+            primary: 'var(--primary)',
+            accent: 'var(--accent)',
+            background: 'var(--background)',
+            surface: 'var(--surface)',
+            secondary: 'var(--secondary)',
+            'text-primary': 'var(--text-primary)',
+            'text-secondary': 'var(--text-secondary)',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /* Inlined Google Fonts to prevent CORS issues with html-to-image */
+    /* Barlow */
+    @font-face {
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/barlow/v18/7cHpv4kjgoGqM7E_DMs7.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfMv4A.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfO95A.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfOA5A.woff2) format('woff2');
+    }
+    
+    /* Inter */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2'); }
+    /* Roboto */
+    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2'); }
+    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc9.woff2) format('woff2'); }
+    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.woff2) format('woff2'); }
+    /* Montserrat */
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format('woff2'); }
+    /* Rubik */
+    @font-face { font-family: 'Rubik'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(https://fonts.gstatic.com/s/rubik/v28/iJW-BXyIfDnIV5PU-A1Apms.woff2) format('woff2'); }
+    /* Nunito */
+    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofINeaB.woff2) format('woff2'); }
+    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIO-aB.woff2) format('woff2'); }
+    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIAuaB.woff2) format('woff2'); }
+    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIS-aB.woff2) format('woff2'); }
+    /* Quicksand */
+    @font-face { font-family: 'Quicksand'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(https://fonts.gstatic.com/s/quicksand/v31/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58a-wg.woff2) format('woff2');}
+
+    /* Theme Variables */
+    html.theme-spotify-dark {
+      --primary: #1DB954;
+      --accent: #1A73E8;
+      --background: #121212;
+      --surface: #181818;
+      --secondary: #282828;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B3B3B3;
+    }
+    html.theme-msteams-dark {
+      --primary: #6264A7;
+      --accent: #7B7DBC;
+      --background: #1F1F1F;
+      --surface: #252525;
+      --secondary: #3B3B3B;
+      --text-primary: #FFFFFF;
+      --text-secondary: #C8C8C8;
+    }
+    html.theme-discord-dark {
+      --primary: #5865F2;
+      --accent: #4E5EE2;
+      --background: #313338;
+      --surface: #2B2D31;
+      --secondary: #1E1F22;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B5BAC1;
+    }
+    html.theme-slack-dark {
+      --primary: #ECB22E;
+      --accent: #36C5F0;
+      --background: #1A1D21;
+      --surface: #222529;
+      --secondary: #363A3F;
+      --text-primary: #D1D2D3;
+      --text-secondary: #A0A1A2;
+    }
+    html.theme-twitter-dark {
+      --primary: #1D9BF0;
+      --accent: #FFD400;
+      --background: #000000;
+      --surface: #16181C;
+      --secondary: #272A2E;
+      --text-primary: #E7E9EA;
+      --text-secondary: #71767B;
+    }
+    html.theme-google-light {
+      --primary: #1A73E8;
+      --accent: #D93025;
+      --background: #F8F9FA;
+      --surface: #FFFFFF;
+      --secondary: #E9E9E9;
+      --text-primary: #202124;
+      --text-secondary: #5F6368;
+    }
+    html.theme-notion-light {
+      --primary: #37352F;
+      --accent: #E03E3E;
+      --background: #F7F7F5;
+      --surface: #FFFFFF;
+      --secondary: #EBEBEA;
+      --text-primary: #37352F;
+      --text-secondary: #9B9A97;
+    }
+    html.theme-amazon-light {
+      --primary: #FF9900;
+      --accent: #0073BB;
+      --background: #EAEDED;
+      --surface: #FFFFFF;
+      --secondary: #F0F2F2;
+      --text-primary: #0F1111;
+      --text-secondary: #565959;
+    }
+
+    body {
+      font-family: var(--font-sans), sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Fix for browser autofill styles */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--secondary) inset !important;
+        -webkit-text-fill-color: var(--text-primary) !important;
+        caret-color: var(--text-primary) !important;
+    }
+    /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
+    .freeboard-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    .freeboard-scrollbar::-webkit-scrollbar-track {
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+    .freeboard-scrollbar::-webkit-scrollbar-thumb {
+      background-color: var(--text-secondary);
+      border-radius: 4px;
+      border: 2px solid var(--secondary);
+    }
+    .freeboard-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: var(--primary);
+    }
+    /* Custom Scrollbar for Firefox */
+    .freeboard-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: var(--text-secondary) var(--secondary);
+    }
+  </style>
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.26.0",
+      "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+      "recharts": "https://aistudiocdn.com/recharts@^2.12.7",
+      "html-to-image": "https://aistudiocdn.com/html-to-image@^1.11.11"
+    }
+  }
+  </script>
+  <script type="module" crossorigin src="/assets/index-D6ivAOKE.js"></script>
+</head>
+<body class="bg-background">
+  <div id="root"></div>
+
+
+</body>
+</html>
