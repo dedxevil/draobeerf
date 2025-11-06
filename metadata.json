@@ -1,0 +1,5 @@
+{
+  "name": "Freeboard : AI-Powered Dashboard Creator",
+  "description": "A no-backend, client-side dashboard creator that connects to PostgREST-enabled databases like Supabase and Neon. Build, visualize, and manage your data with various chart types and an integrated AI assistant to help you write queries and gain insights. All configurations are stored locally in your browser.",
+  "requestFramePermissions": []
+}
