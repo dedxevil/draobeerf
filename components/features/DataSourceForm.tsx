@@ -68,11 +68,15 @@ const DataSourceForm: React.FC<DataSourceFormProps> = ({ dataSource, onSuccess }
         if (formData.type === DataSourceType.Supabase) return 'https://<project-id>.supabase.co/rest/v1';
         if (formData.type === DataSourceType.Neon) return 'https://<project-id>.neon.tech/rest/v1';
         if (formData.type === DataSourceType.REST) return 'https://your-api.com/base/path';
+        if (formData.type === DataSourceType.Airtable) return 'https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME';
+        if (formData.type === DataSourceType.GoogleSheets) return 'https://sheets.googleapis.com/v4/spreadsheets/YOUR_SHEET_ID/values/Sheet1!A1:Z1000';
         return 'https://your-postgrest-api.com';
     }
     if (field === 'apiKey') {
         if (formData.type === DataSourceType.Supabase) return 'Supabase Anon Key';
         if (formData.type === DataSourceType.REST) return 'API Key / Bearer Token (Optional)';
+        if (formData.type === DataSourceType.Airtable) return 'Personal Access Token (pat...)';
+        if (formData.type === DataSourceType.GoogleSheets) return 'Google Cloud API Key';
         return 'Bearer Token (Optional)';
     }
     return '';

@@ -200,6 +200,10 @@ const ChartWrapper: React.FC<ChartWrapperProps> = ({ chart, onEdit, onDelete, on
                 const message = alert.customMessage ? `"${alert.name}" has resolved.` : `Alert "${alert.name}" on chart "${chart.name}" has resolved.`;
                 showNotification(chart.name, { body: message });
                 updateAlert({ ...alert, status: 'ok', lastChecked: now });
+            } else {
+                // If the status hasn't changed, still update the lastChecked timestamp.
+                // This ensures the timestamp is always current for every check.
+                updateAlert({ ...alert, lastChecked: now });
             }
         });
     }, [alerts, id, chart, addTriggeredAlert, updateAlert, viewOnly]);

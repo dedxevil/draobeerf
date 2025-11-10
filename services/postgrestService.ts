@@ -4,8 +4,6 @@ import { convertSqlToRest } from './geminiService';
 const getHeaders = (dataSource: Pick<DataSource, 'type' | 'apiKey'>): Record<string, string> => {
   const headers: Record<string, string> = {};
 
-  // For PostgREST-based requests, we always expect a JSON response.
-  // Stricter API gateways might reject requests without this header.
   if (dataSource.type === DataSourceType.Supabase ||
       dataSource.type === DataSourceType.Neon ||
       dataSource.type === DataSourceType.Generic) {
@@ -19,9 +17,9 @@ const getHeaders = (dataSource: Pick<DataSource, 'type' | 'apiKey'>): Record<str
   switch (dataSource.type) {
     case DataSourceType.Supabase:
       headers['apikey'] = dataSource.apiKey;
-      // Authorization is often needed as well for RLS
       headers['Authorization'] = `Bearer ${dataSource.apiKey}`;
       break;
+    case DataSourceType.Airtable:
     case DataSourceType.Neon:
     case DataSourceType.Generic:
     case DataSourceType.REST:
@@ -31,15 +29,38 @@ const getHeaders = (dataSource: Pick<DataSource, 'type' | 'apiKey'>): Record<str
   return headers;
 }
 
+const getSpreadsheetId = (url: string): string | null => {
+    const match = url.match(/\/spreadsheets\/([a-zA-Z0-9-_]+)/);
+    return match ? match[1] : null;
+};
+
 export const testConnection = async (dataSource: Omit<DataSource, 'id'>): Promise<boolean> => {
   try {
-    // A GET request to the PostgREST root returns the OpenAPI schema,
-    // which is a reliable way to confirm connectivity and authentication.
-    const response = await fetch(dataSource.url, {
-      method: 'GET',
-      mode: 'cors',
-      headers: getHeaders({ type: dataSource.type, apiKey: dataSource.apiKey }),
-    });
+    let testUrl = dataSource.url;
+    let options: RequestInit = {
+        method: 'GET',
+        mode: 'cors',
+        headers: getHeaders({ type: dataSource.type, apiKey: dataSource.apiKey }),
+    };
+
+    switch (dataSource.type) {
+        case DataSourceType.Airtable:
+            testUrl = `${dataSource.url.split('?')[0]}?maxRecords=1`;
+            break;
+        case DataSourceType.GoogleSheets:
+            const spreadsheetId = getSpreadsheetId(dataSource.url);
+            if (!spreadsheetId) throw new Error("Invalid Google Sheets URL format.");
+            testUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?key=${dataSource.apiKey}`;
+            options.headers = {}; // API key is in URL
+            break;
+        case DataSourceType.Supabase:
+        case DataSourceType.Neon:
+        case DataSourceType.Generic:
+            // PostgREST root returns OpenAPI spec
+            break;
+    }
+
+    const response = await fetch(testUrl, options);
     return response.ok;
   } catch (error) {
     console.error('Connection test failed:', error);
@@ -50,8 +71,6 @@ export const testConnection = async (dataSource: Omit<DataSource, 'id'>): Promis
 export const fetchData = async (dataSource: DataSource, query: string, geminiApiKey?: string): Promise<any[]> => {
   let path = query;
   
-  // If the query looks like SQL, convert it to a PostgREST path using AI.
-  // This happens seamlessly without user interaction.
   if (path.trim().toLowerCase().startsWith('select')) {
     if (!geminiApiKey) {
       throw new Error("Cannot convert SQL query to REST path without a Gemini API key. Please add one in Settings.");
@@ -59,21 +78,29 @@ export const fetchData = async (dataSource: DataSource, query: string, geminiApi
     try {
       path = await convertSqlToRest(path, geminiApiKey);
     } catch (e: any) {
-      // Re-throw a more user-friendly error that will be displayed in the UI.
       throw new Error(`AI conversion of SQL failed: ${e.message}`);
     }
   }
 
-  // Robustly join URL parts, handling optional query and avoiding double slashes.
-  const url = [dataSource.url.replace(/\/$/, ''), path.replace(/^\//, '')]
-    .filter(Boolean)
-    .join('/');
+  let finalUrl: string;
+  const headers = getHeaders(dataSource);
+
+  if (dataSource.type === DataSourceType.GoogleSheets) {
+    finalUrl = `${dataSource.url}&key=${dataSource.apiKey}`;
+    delete headers['Authorization'];
+  } else if (dataSource.type === DataSourceType.Airtable) {
+    finalUrl = path ? `${dataSource.url}?${path}` : dataSource.url;
+  } else {
+    finalUrl = [dataSource.url.replace(/\/$/, ''), path.replace(/^\//, '')]
+      .filter(Boolean)
+      .join('/');
+  }
   
   try {
-    const response = await fetch(url, {
+    const response = await fetch(finalUrl, {
       method: 'GET',
-      mode: 'cors', // FIX: Explicitly set CORS mode to align with best practices.
-      headers: { ...getHeaders(dataSource), 'Accept': 'application/json' },
+      mode: 'cors',
+      headers: { ...headers, 'Accept': 'application/json' },
     });
 
     if (!response.ok) {
@@ -83,6 +110,8 @@ export const fetchData = async (dataSource: DataSource, query: string, geminiApi
         const errorJson = JSON.parse(errorText);
         if (errorJson.message) {
             errorMessage += ` Message: ${errorJson.message}`;
+        } else if (errorJson.error?.message) {
+            errorMessage += ` Message: ${errorJson.error.message}`;
         }
       } catch {
         errorMessage += ` Body: ${errorText}`;
@@ -91,21 +120,37 @@ export const fetchData = async (dataSource: DataSource, query: string, geminiApi
     }
 
     const data = await response.json();
-    
-    // If the API returns a single object, wrap it in an array for consistency.
-    if (data && typeof data === 'object' && !Array.isArray(data)) {
-        // Handle cases where the actual array might be nested, e.g., { "data": [...] }
-        const dataKey = Object.keys(data).find(key => Array.isArray(data[key]));
-        if (dataKey) {
-            return data[dataKey];
-        }
-        return [data];
+
+    // Data Transformation Layer
+    switch (dataSource.type) {
+        case DataSourceType.Airtable:
+            if (data && Array.isArray(data.records)) {
+                return data.records.map((rec: any) => ({ ...rec.fields, _airtableId: rec.id }));
+            }
+            return [];
+        case DataSourceType.GoogleSheets:
+            if (data && Array.isArray(data.values) && data.values.length > 1) {
+                const [header, ...rows] = data.values;
+                return rows.map(row => {
+                    const rowObject: Record<string, any> = {};
+                    header.forEach((key: string, index: number) => {
+                        rowObject[key] = row[index];
+                    });
+                    return rowObject;
+                });
+            }
+            return [];
+        default:
+             if (data && typeof data === 'object' && !Array.isArray(data)) {
+                const dataKey = Object.keys(data).find(key => Array.isArray(data[key]));
+                if (dataKey) {
+                    return data[dataKey];
+                }
+                return [data];
+            }
+            return Array.isArray(data) ? data : [];
     }
-    
-    return Array.isArray(data) ? data : [];
   } catch (error) {
-    // Re-throwing the error to be caught by the UI component.
-    // If it's a fetch error from the network, log it. Otherwise, the custom error from above or the fetch logic will be used.
     if (!(error instanceof Error && (error.message.startsWith('AI conversion') || error.message.startsWith('Request failed')))) {
         console.error('Fetch data failed:', error);
     }

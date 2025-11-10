@@ -7,6 +7,8 @@ export const DATA_SOURCE_TYPE_OPTIONS = [
   { value: DataSourceType.Neon, label: 'Neon (PostgREST)' },
   { value: DataSourceType.Generic, label: 'Generic PostgREST' },
   { value: DataSourceType.REST, label: 'Generic REST API' },
+  { value: DataSourceType.Airtable, label: 'Airtable' },
+  { value: DataSourceType.GoogleSheets, label: 'Google Sheets' },
 ];
 
 export const CHART_TYPE_OPTIONS = [

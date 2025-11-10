@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import LeftSidebar from './components/layout/LeftSidebar';
@@ -14,6 +15,7 @@ import { ToastContainer } from './components/ui/Toast';
 import { requestNotificationPermission } from './services/notificationService';
 import { useWindowSize } from './hooks/useWindowSize';
 import { APP_FONTS } from './constants';
+import { ThemeColors } from './types';
 
 const MOBILE_BREAKPOINT = 1024; // Tailwind's 'lg' breakpoint
 
@@ -80,6 +82,28 @@ const ThemedApp: React.FC = () => {
     const root = document.documentElement;
     root.className = settings.theme;
   }, [settings.theme]);
+
+  // Effect to apply custom theme colors as CSS variables
+  useEffect(() => {
+    const root = document.documentElement;
+    const customColorsForTheme = settings.customColors?.[settings.theme];
+
+    const colorVariableNames: (keyof ThemeColors)[] = [
+        'primary', 'accent', 'background', 'surface', 
+        'secondary', 'text-primary', 'text-secondary'
+    ];
+
+    colorVariableNames.forEach(colorName => {
+        const cssVar = `--${colorName}`;
+        const customValue = customColorsForTheme?.[colorName];
+
+        if (customValue) {
+            root.style.setProperty(cssVar, customValue);
+        } else {
+            root.style.removeProperty(cssVar);
+        }
+    });
+  }, [settings.theme, settings.customColors]);
 
   useEffect(() => {
     const root = document.documentElement;

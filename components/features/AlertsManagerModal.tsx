@@ -33,7 +33,12 @@ interface AlertFormData {
     customMessage: string;
 }
 
-const AlertForm: React.FC<{chart: ChartConfig, alertToEdit?: Alert | null, relevantFields: string[], onSave: () => void, onCancel: () => void}> = ({ chart, alertToEdit, relevantFields, onSave, onCancel }) => {
+const getNestedValue = (obj: any, path: string): any => {
+    if (!path || typeof path !== 'string') return undefined;
+    return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+};
+
+const AlertForm: React.FC<{chart: ChartConfig, alertToEdit?: Alert | null, relevantFields: string[], dataSample: any | null, onSave: () => void, onCancel: () => void}> = ({ chart, alertToEdit, relevantFields, dataSample, onSave, onCancel }) => {
     const { addAlert, updateAlert } = useAppContext();
     const { addToast } = useToast();
     const [formData, setFormData] = useState<AlertFormData>({
@@ -78,6 +83,30 @@ const AlertForm: React.FC<{chart: ChartConfig, alertToEdit?: Alert | null, relev
                 threshold: numericThreshold // override with number
             });
         } else {
+            let initialStatus: 'ok' | 'triggered' = 'ok';
+
+            // Silently set initial state to 'triggered' if condition is already met
+            if (dataSample && formData.field) {
+                const value = getNestedValue(dataSample, formData.field);
+                if (value !== undefined && value !== null) {
+                    const sanitizedValue = String(value).replace(/[^0-9.-]+/g, "");
+                    const numericValue = sanitizedValue === '' ? NaN : Number(sanitizedValue);
+                    if (!isNaN(numericValue)) {
+                        let conditionMet = false;
+                        switch (formData.operator) {
+                            case AlertConditionOperator.GreaterThan: conditionMet = numericValue > numericThreshold; break;
+                            case AlertConditionOperator.LessThan: conditionMet = numericValue < numericThreshold; break;
+                            case AlertConditionOperator.EqualTo: conditionMet = numericValue === numericThreshold; break;
+                            case AlertConditionOperator.GreaterThanOrEqual: conditionMet = numericValue >= numericThreshold; break;
+                            case AlertConditionOperator.LessThanOrEqual: conditionMet = numericValue <= numericThreshold; break;
+                        }
+                        if (conditionMet) {
+                            initialStatus = 'triggered';
+                        }
+                    }
+                }
+            }
+
             addAlert({
                 id: crypto.randomUUID(),
                 chartId: formData.chartId,
@@ -88,7 +117,7 @@ const AlertForm: React.FC<{chart: ChartConfig, alertToEdit?: Alert | null, relev
                 threshold: numericThreshold,
                 customMessage: formData.customMessage,
                 lastChecked: new Date().toISOString(),
-                status: 'ok',
+                status: initialStatus,
             });
         }
         onSave();
@@ -204,6 +233,7 @@ const AlertsManagerModal: React.FC<AlertsManagerModalProps> = ({ chart, dataSamp
                 chart={chart} 
                 alertToEdit={editingAlert} 
                 relevantFields={relevantFields} 
+                dataSample={dataSample}
                 onSave={handleSave} 
                 onCancel={() => { setIsFormVisible(false); setEditingAlert(null); }}
             />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '../ui/Modal';
 import ReactMarkdown from 'react-markdown';
-import { ChevronDownIcon, StarIcon, LayersIcon, BarChartIcon, AIIcon, DashboardIcon, AlertIcon, SettingsIcon, RocketIcon, CodeIcon } from '../layout/Icons';
+import { ChevronDownIcon, StarIcon, LayersIcon, BarChartIcon, AIIcon, DashboardIcon, AlertIcon, SettingsIcon, RocketIcon, CodeIcon, DataSourceIcon } from '../layout/Icons';
 
 // A color palette for the section titles to make them more recognizable.
 const sectionColors = ['#1A73E8', '#F4A261', '#2A9D8F', '#E76F51', '#8E44AD', '#F1C40F'];
@@ -23,16 +23,35 @@ const helpSections = [
 -   **Customizable Dashboards**: Create multiple dashboards to organize your charts by project, team, or any other criteria.
 -   **Command Centers**: Build presentation-ready views by arranging charts from any of your dashboards onto a single, dynamic grid layout.
 -   **Data-Driven Alerts**: Set up custom alerts on your chart data with various conditions (e.g., value > 100) and receive browser notifications when they trigger.
--   **Secure Workspace Portability**: Export your entire workspace (data sources, charts, dashboards, API key) into a single, password-encrypted file for easy backup, sharing, or migration.
+-   **Secure Workspace Portability**: Export your entire workspace (data sources, charts, dashboards, API key) into a single, password-protected file for easy backup, sharing, or migration.
 -   **Deep Customization**: Personalize your workspace with multiple themes (e.g., Spotify Dark, Google Light) and a selection of professional fonts.
     `
   },
   {
-    id: 'feature-breakdown',
-    icon: LayersIcon,
-    title: 'Feature Breakdown',
-    color: sectionColors[1],
-    content: `This section provides more detail on the core features of Freeboard.`
+    id: 'datasources',
+    icon: DataSourceIcon,
+    title: 'Connecting to Airtable & Google Sheets',
+    color: sectionColors[4],
+    content: `
+### Connecting to Airtable
+
+1.  **URL Format**: \`https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME\`
+    -   You can find your Base ID and table name in the [Airtable API documentation](https://airtable.com/developers/web/api/introduction) for your base.
+2.  **API Key**: Use a **Personal Access Token**.
+    -   Create a token with \`data.records:read\` scope in your [Airtable developer hub](https://airtable.com/create/tokens).
+
+### Connecting to Google Sheets
+
+1.  **Publish your Sheet**: In Google Sheets, go to \`File > Share > Publish to web\`. This makes the data public.
+2.  **Get a Google Cloud API Key**:
+    -   Create a new project in the [Google Cloud Console](https://console.cloud.google.com/).
+    -   Enable the "Google Sheets API" for your project.
+    -   Go to "Credentials" and create a new API Key. **Restrict this key** to only be usable by the Google Sheets API for security.
+3.  **URL Format**: \`https://sheets.googleapis.com/v4/spreadsheets/YOUR_SHEET_ID/values/Sheet1!A1:Z1000\`
+    -   **Sheet ID**: You can find this in your Google Sheets URL (e.g., \`.../d/SHEET_ID/edit\`).
+    -   **Range**: Specify the sheet name and cell range you want to fetch (e.g., \`Sheet1!A1:Z1000\`).
+4.  **API Key**: Paste the Google Cloud API Key you created.
+`
   },
   {
     id: 'charts',
@@ -96,7 +115,7 @@ const helpSections = [
     color: sectionColors[0], // Repeating colors
     content: `
 -   **Themes & Fonts**: Instantly change the entire look and feel of the application from the Settings page to match your preference.
--   **Encrypted Import/Export**: Your workspace is your own. Use the password-based encryption feature to generate a secure backup file. Import this file in another browser or share it with a colleague to perfectly replicate your entire setup.
+-   **Secure Import/Export**: Your workspace is your own. Use the password-protection feature to generate a secure backup file. Import this file in another browser or share it with a colleague to perfectly replicate your entire setup.
 -   **Reset Workspace**: Completely wipe your local workspace from the settings page to start over. This action is irreversible.
     `
   },
@@ -187,6 +206,10 @@ const HelpModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   return (
     <Modal title="Freeboard Help Manual" onClose={onClose} size="large">
+      <div className="text-center text-sm text-text-secondary mb-4 pb-4 border-b border-secondary/20">
+        Made with 🕒 by <a href="https://17x.in" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">17x.in</a>.
+        Want help? Contact <a href="https://x.com/dedrevil" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">dedrevil on X</a>.
+      </div>
       <div className="space-y-2">
         {helpSections.map(section => (
           <AccordionItem

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
@@ -8,6 +9,8 @@ import { APP_THEMES, APP_FONTS } from '../../constants';
 import { encryptWorkspace, decryptWorkspace } from '../../services/cryptoService';
 import Input from '../ui/Input';
 import Tooltip from '../ui/Tooltip';
+import { PencilIcon } from '../layout/Icons';
+import ThemeCustomizationModal from '../features/ThemeCustomizationModal';
 
 type PersistedState = Omit<AppState, 'triggeredAlerts' | 'lastTriggeredAlertTimestamp' | 'isCommandCenterEditMode'>;
 
@@ -40,6 +43,9 @@ const SettingsPage: React.FC = () => {
   const [importData, setImportData] = useState<string | null>(null); // Store file content for decryption
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   
+  const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false);
+  const [customizingThemeId, setCustomizingThemeId] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   const [localApiKey, setLocalApiKey] = useState(settings.geminiApiKey || '');
@@ -84,14 +90,14 @@ const SettingsPage: React.FC = () => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `freeboard-workspace-encrypted-${new Date().toISOString().split('T')[0]}.json`;
+        link.download = `freeboard-workspace-secured-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     } catch (error) {
         console.error('Encryption failed', error);
-        addToast('Could not encrypt workspace. Please try again.', { type: 'error' });
+        addToast('Could not secure workspace. Please try again.', { type: 'error' });
     } finally {
         setProcessing(false);
         setIsPasswordModalOpen(false);
@@ -118,7 +124,7 @@ const SettingsPage: React.FC = () => {
         } else if (parsed.dataSources && parsed.charts && parsed.settings) {
             // Assume it's a legacy unencrypted file
             importWorkspace(parsed);
-            addToast('Unencrypted workspace imported successfully!', { type: 'success' });
+            addToast('Unsecured workspace imported successfully!', { type: 'success' });
             navigate('/dashboards');
         } else {
              throw new Error('Invalid or corrupted workspace file format.');
@@ -138,7 +144,7 @@ const SettingsPage: React.FC = () => {
   
   const executeImport = async () => {
     if (!password) {
-      setPasswordError('Password is required to decrypt the file.');
+      setPasswordError('Password is required to unlock the file.');
       return;
     }
     if (!importData) return;
@@ -150,11 +156,11 @@ const SettingsPage: React.FC = () => {
       const decryptedJson = await decryptWorkspace(importData, password);
       const importedState = JSON.parse(decryptedJson) as Partial<PersistedState>;
       importWorkspace(importedState);
-      addToast('Workspace decrypted and imported successfully!', { type: 'success' });
+      addToast('Workspace unlocked and imported successfully!', { type: 'success' });
       navigate('/dashboards');
       setIsPasswordModalOpen(false);
     } catch (error: any) {
-      setPasswordError(error.message || 'Decryption failed.');
+      setPasswordError(error.message || 'Could not unlock file.');
     } finally {
       setProcessing(false);
     }
@@ -201,6 +207,11 @@ const SettingsPage: React.FC = () => {
     navigate('/dashboards');
   };
 
+  const handleCustomizeTheme = (themeId: string) => {
+    setCustomizingThemeId(themeId);
+    setIsCustomizeModalOpen(true);
+  };
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Settings</h2>
@@ -230,9 +241,6 @@ const SettingsPage: React.FC = () => {
                 </button>
             </div>
         </div>
-        <p className="text-xs text-text-secondary">
-          Get your API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google AI Studio</a>.
-        </p>
       </div>
 
       <div className="bg-surface rounded-lg shadow-lg p-6 space-y-4">
@@ -286,27 +294,35 @@ const SettingsPage: React.FC = () => {
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-2">
           {APP_THEMES.map((theme) => (
-            <button
+            <div
               key={theme.id}
-              onClick={() => setTheme(theme.id)}
-              className={`p-3 rounded-lg transition-all duration-200 border-2 text-left ${
+              className={`p-3 rounded-lg transition-all duration-200 border-2 text-left flex flex-col justify-between ${
                 settings.theme === theme.id
                   ? 'border-primary ring-2 ring-primary ring-offset-2 ring-offset-surface'
-                  : 'border-secondary/30 hover:border-primary/50'
+                  : 'border-secondary/30'
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-sm text-text-primary">{theme.name}</span>
-                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: theme.colors.primary }}></div>
-              </div>
-              <div className="flex gap-1 h-8 rounded" style={{ backgroundColor: theme.colors.background }}>
-                <div className="w-1/3 rounded-l" style={{ backgroundColor: theme.colors.surface }}></div>
-                <div className="w-2/3 flex items-center justify-end pr-2">
-                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: theme.colors.primary }}></div>
+              <button onClick={() => setTheme(theme.id)} className="w-full text-left">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-semibold text-sm text-text-primary">{theme.name}</span>
+                  <div className="w-4 h-4 rounded-full" style={{ backgroundColor: theme.colors.primary }}></div>
                 </div>
+                <div className="flex gap-1 h-8 rounded" style={{ backgroundColor: theme.colors.background }}>
+                  <div className="w-1/3 rounded-l" style={{ backgroundColor: theme.colors.surface }}></div>
+                  <div className="w-2/3 flex items-center justify-end pr-2">
+                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: theme.colors.primary }}></div>
+                  </div>
+                </div>
+              </button>
+              <div className="flex justify-between items-center mt-2 pt-2 border-t border-secondary/20">
+                <div className={`text-xs capitalize text-text-secondary`}>{theme.base}</div>
+                 <Tooltip text="Customize Theme Colors">
+                    <button onClick={() => handleCustomizeTheme(theme.id)} className="p-1 rounded text-text-secondary hover:bg-secondary/50 hover:text-text-primary">
+                        <PencilIcon className="w-4 h-4" />
+                    </button>
+                 </Tooltip>
               </div>
-              <div className={`text-xs mt-2 text-text-secondary capitalize`}>{theme.base}</div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
@@ -314,11 +330,11 @@ const SettingsPage: React.FC = () => {
       <div className="bg-surface rounded-lg shadow-lg p-6 space-y-4">
         <h3 className="text-lg font-semibold">Workspace Management</h3>
         <p className="text-text-secondary text-sm">
-          Export your entire workspace as a single encrypted JSON file for backup or sharing. You can import it later to restore your setup.
+          Export your entire workspace as a single secured JSON file for backup or sharing. You can import it later to restore your setup.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 pt-2">
            <button onClick={handleExportRequest} className="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-            Export Encrypted Workspace
+            Export Workspace
            </button>
            <label className="bg-secondary hover:bg-secondary/70 text-white font-bold py-2 px-4 rounded-lg transition-colors cursor-pointer text-center">
               Import Workspace
@@ -358,14 +374,14 @@ const SettingsPage: React.FC = () => {
       
       {isPasswordModalOpen && (
         <Modal 
-            title={passwordModalMode === 'encrypt' ? "Set Encryption Password" : "Enter Decryption Password"}
+            title={passwordModalMode === 'encrypt' ? "Set Workspace Password" : "Enter Workspace Password"}
             onClose={() => setIsPasswordModalOpen(false)}
         >
             <form onSubmit={handlePasswordModalSubmit} className="space-y-4">
                 <p className="text-text-secondary text-sm">
                     {passwordModalMode === 'encrypt' 
-                        ? 'Please enter a strong password to encrypt your workspace file.'
-                        : 'This workspace file is encrypted. Please enter the password to decrypt it.'}
+                        ? 'Please enter a strong password to secure your workspace file.'
+                        : 'This workspace file is password-protected. Please enter the password to open it.'}
                 </p>
                 <Input 
                     label="Password"
@@ -384,7 +400,7 @@ const SettingsPage: React.FC = () => {
                     <button type="submit" disabled={processing} className="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-wait">
                         {processing 
                             ? 'Processing...' 
-                            : (passwordModalMode === 'encrypt' ? 'Encrypt & Export' : 'Decrypt & Import')
+                            : (passwordModalMode === 'encrypt' ? 'Secure & Export' : 'Unlock & Import')
                         }
                     </button>
                 </div>
@@ -407,6 +423,13 @@ const SettingsPage: React.FC = () => {
                 </div>
             </div>
         </Modal>
+      )}
+
+      {isCustomizeModalOpen && customizingThemeId && (
+        <ThemeCustomizationModal 
+            themeId={customizingThemeId}
+            onClose={() => setIsCustomizeModalOpen(false)}
+        />
       )}
     </div>
   );

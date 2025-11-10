@@ -73,7 +73,7 @@ Convert the following SQL query:
         return response.text.trim().replace(/^`+|`+$/g, '');
     } catch (error) {
         console.error("Error calling Gemini API for SQL conversion:", error);
-        throw new Error("Sorry, I encountered an error while converting your SQL query. Check your API Key.");
+        throw new Error("Sorry, I encountered an error while converting your SQL query. Check your Key.");
     }
 };
 

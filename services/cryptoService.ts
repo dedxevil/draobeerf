@@ -50,10 +50,10 @@ async function getEncryptionKey(password: string, salt: Uint8Array): Promise<Cry
 }
 
 /**
- * Encrypts a JSON string with a password.
- * @param jsonData The workspace data to encrypt.
+ * Secures a JSON string with a password.
+ * @param jsonData The workspace data to secure.
  * @param password The user-provided password.
- * @returns A JSON string containing the salt, IV, and ciphertext.
+ * @returns A JSON string containing the salt, IV, and ciphertext for storage.
  */
 export async function encryptWorkspace(jsonData: string, password: string): Promise<string> {
     const salt = window.crypto.getRandomValues(new Uint8Array(SALT_LENGTH));
@@ -78,10 +78,10 @@ export async function encryptWorkspace(jsonData: string, password: string): Prom
 }
 
 /**
- * Decrypts an encrypted workspace payload with a password.
+ * Unlocks a secured workspace payload with a password.
  * @param encryptedPayload JSON string containing salt, IV, and ciphertext.
  * @param password The user-provided password.
- * @returns The original decrypted JSON string.
+ * @returns The original JSON string.
  */
 export async function decryptWorkspace(encryptedPayload: string, password: string): Promise<string> {
     const { salt, iv, ciphertext } = JSON.parse(encryptedPayload);
@@ -106,7 +106,7 @@ export async function decryptWorkspace(encryptedPayload: string, password: strin
         return new TextDecoder().decode(decrypted);
     } catch (error) {
         // This will typically fail if the password is wrong (tag authentication error)
-        console.error('Decryption failed:', error);
-        throw new Error('Decryption failed. Invalid password or corrupted file.');
+        console.error('Unlocking failed:', error);
+        throw new Error('Could not unlock file. Invalid password or corrupted file.');
     }
 }

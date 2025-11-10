@@ -4,6 +4,8 @@ export enum DataSourceType {
   Neon = 'neon',
   Generic = 'generic',
   REST = 'rest',
+  Airtable = 'airtable',
+  GoogleSheets = 'google-sheets',
 }
 
 export enum ChartType {
@@ -95,6 +97,16 @@ export interface CommandCenter {
   };
 }
 
+export interface ThemeColors {
+  primary: string;
+  accent: string;
+  background: string;
+  surface: string;
+  secondary: string;
+  'text-primary': string;
+  'text-secondary': string;
+}
+
 export interface AppSettings {
   theme: string;
   font: string;
@@ -102,6 +114,7 @@ export interface AppSettings {
   activeCommandCenterId?: string;
   aiFeaturesEnabled: boolean;
   geminiApiKey: string;
+  customColors?: Record<string, Partial<ThemeColors>>;
 }
 
 export interface Alert {

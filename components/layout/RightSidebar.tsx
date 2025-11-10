@@ -28,13 +28,12 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen, setIsOpen, isMobile
 
   useEffect(() => {
     // When a new alert is triggered, automatically open the sidebar and switch to the alerts tab.
+    // This allows the user to freely close the sidebar afterwards without it re-opening.
     if (lastTriggeredAlertTimestamp) {
       setActiveTab('alerts');
-      if (!isOpen) {
-        setIsOpen(true);
-      }
+      setIsOpen(true);
     }
-  }, [lastTriggeredAlertTimestamp, isOpen, setIsOpen]);
+  }, [lastTriggeredAlertTimestamp, setIsOpen, setActiveTab]);
 
   // Group alerts by chartId for a cleaner display
   const groupedAlerts = triggeredAlerts.reduce((acc, alert) => {

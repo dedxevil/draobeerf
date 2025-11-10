@@ -262,49 +262,69 @@ const ChartForm: React.FC<ChartFormProps> = ({ chart, initialData, onSuccess, da
   }));
   
   const selectedDataSource = dataSources.find(ds => ds.id === formData.dataSourceId);
-  const isPostgrest = selectedDataSource?.type === DataSourceType.Supabase || 
-                      selectedDataSource?.type === DataSourceType.Neon || 
-                      selectedDataSource?.type === DataSourceType.Generic;
 
   const QueryInputSection = () => {
-    if (!isPostgrest) {
-        return (
-            <Textarea
-                label="API Endpoint Path (Optional)"
-                name="query"
-                value={formData.query}
-                onChange={handleChange}
-                placeholder="e.g., /users?active=true"
-                rows={2}
-            />
-        );
-    }
-
-    return (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-text-secondary">Query Method</label>
-            <div className="flex gap-1 p-1 bg-secondary/30 rounded-lg">
-                <button type="button" onClick={() => setIsAdvancedQuery(false)} className={`flex-1 p-2 rounded-md transition-colors text-xs ${!isAdvancedQuery ? 'bg-primary text-white' : 'hover:bg-secondary'}`}>Simple</button>
-                <button type="button" onClick={() => setIsAdvancedQuery(true)} className={`flex-1 p-2 rounded-md transition-colors text-xs ${isAdvancedQuery ? 'bg-primary text-white' : 'hover:bg-secondary'}`}>Advanced</button>
-            </div>
-            
-            <div className="pt-2">
+    switch (selectedDataSource?.type) {
+        case DataSourceType.Airtable:
+            return (
                 <Textarea
-                    label={isAdvancedQuery ? "Custom Query (SQL or REST Path)" : "Table / View Name"}
+                    label="Query Parameters (Optional)"
                     name="query"
                     value={formData.query}
                     onChange={handleChange}
-                    placeholder={isAdvancedQuery ? "e.g., SELECT * FROM users OR users?select=name,age" : "e.g., sales_data"}
-                    rows={isAdvancedQuery ? 4 : 1}
+                    placeholder="e.g., view=MyView&sort%5B0%5D%5Bfield%5D=Name"
+                    rows={2}
                 />
-            </div>
-        </div>
-    );
+            );
+        case DataSourceType.GoogleSheets:
+            return (
+                <div className="p-4 bg-secondary/20 rounded-lg text-center">
+                    <p className="text-sm text-text-secondary">
+                        The full data range is specified in the Data Source URL. No additional query is needed here.
+                    </p>
+                </div>
+            )
+        case DataSourceType.Supabase:
+        case DataSourceType.Neon:
+        case DataSourceType.Generic:
+            return (
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-text-secondary">Query Method</label>
+                    <div className="flex gap-1 p-1 bg-secondary/30 rounded-lg">
+                        <button type="button" onClick={() => setIsAdvancedQuery(false)} className={`flex-1 p-2 rounded-md transition-colors text-xs ${!isAdvancedQuery ? 'bg-primary text-white' : 'hover:bg-secondary'}`}>Simple</button>
+                        <button type="button" onClick={() => setIsAdvancedQuery(true)} className={`flex-1 p-2 rounded-md transition-colors text-xs ${isAdvancedQuery ? 'bg-primary text-white' : 'hover:bg-secondary'}`}>Advanced</button>
+                    </div>
+                    
+                    <div className="pt-2">
+                        <Textarea
+                            label={isAdvancedQuery ? "Custom Query (SQL or REST Path)" : "Table / View Name"}
+                            name="query"
+                            value={formData.query}
+                            onChange={handleChange}
+                            placeholder={isAdvancedQuery ? "e.g., SELECT * FROM users OR users?select=name,age" : "e.g., sales_data"}
+                            rows={isAdvancedQuery ? 4 : 1}
+                        />
+                    </div>
+                </div>
+            );
+        case DataSourceType.REST:
+        default:
+             return (
+                <Textarea
+                    label="API Endpoint Path (Optional)"
+                    name="query"
+                    value={formData.query}
+                    onChange={handleChange}
+                    placeholder="e.g., /users?active=true"
+                    rows={2}
+                />
+            );
+    }
   }
 
   const renderOptions = () => {
     const { options } = formData;
-    const keyPlaceholder = isPostgrest ? "e.g., column_name" : "e.g., user.id";
+    const keyPlaceholder = "e.g., column_name or object.path";
     
     switch (formData.type) {
       case ChartType.Bar:
@@ -315,7 +335,7 @@ const ChartForm: React.FC<ChartFormProps> = ({ chart, initialData, onSuccess, da
         return (
           <>
             <Input label="X-Axis Key" name="options.xAxisKey" value={options.xAxisKey || ''} onChange={handleChange} placeholder={keyPlaceholder} />
-            <Input label="Y-Axis Key(s)" name="options.yAxisKey" value={options.yAxisKey || ''} onChange={handleChange} placeholder={isPostgrest ? "e.g., value1,value2" : "e.g., sales.total,cost"} />
+            <Input label="Y-Axis Key(s)" name="options.yAxisKey" value={options.yAxisKey || ''} onChange={handleChange} placeholder="e.g., value1,value2" />
             <Input label="X-Axis Label (Optional)" name="options.xAxisLabel" value={options.xAxisLabel || ''} onChange={handleChange} placeholder="e.g., Sales Rep" />
             <Input label="Y-Axis Label (Optional)" name="options.yAxisLabel" value={options.yAxisLabel || ''} onChange={handleChange} placeholder="e.g., Total Revenue" />
           </>
@@ -463,7 +483,7 @@ const ChartForm: React.FC<ChartFormProps> = ({ chart, initialData, onSuccess, da
       <div className="flex justify-between items-center pt-4 border-t border-secondary/20">
         <div className="flex items-center">
             <button type="button" onClick={handleTestConfiguration} disabled={testStatus === 'testing'} className="bg-secondary hover:bg-secondary/70 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-              {testStatus === 'testing' ? 'Testing...' : (isPostgrest ? 'Test Query & Keys' : 'Test API & Keys')}
+              Test Configuration
             </button>
              {testMessage && (
                 <span className={`ml-4 text-sm font-medium ${testStatus === 'success' ? 'text-green-400' : 'text-red-400'}`}>

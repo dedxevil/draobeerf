@@ -1,6 +1,7 @@
+
 import React, { createContext, useContext, ReactNode, useCallback, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { DataSource, ChartConfig, Dashboard, CommandCenter, AppSettings, Alert, TriggeredAlert, AppState, Insight } from '../types';
+import { DataSource, ChartConfig, Dashboard, CommandCenter, AppSettings, Alert, TriggeredAlert, AppState, Insight, ThemeColors } from '../types';
 import { LOCAL_STORAGE_KEY, APP_THEMES, APP_FONTS } from '../constants';
 
 // The part of the state that is persisted to local storage
@@ -15,6 +16,8 @@ interface AppContextType extends AppState {
   deleteChart: (id: string) => void;
   toggleTheme: () => void;
   setTheme: (themeId: string) => void;
+  updateThemeColors: (themeId: string, colors: Partial<ThemeColors>) => void;
+  resetThemeColors: (themeId: string) => void;
   toggleFont: () => void;
   setFont: (fontId: string) => void;
   importWorkspace: (newState: Partial<PersistedState>) => void;
@@ -53,6 +56,7 @@ const defaultState: PersistedState = {
     activeDashboardId: defaultDashboardId,
     aiFeaturesEnabled: true,
     geminiApiKey: '',
+    customColors: {},
   },
   alerts: [],
   insights: [],
@@ -222,6 +226,33 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             settings: {
                 ...prev.settings,
                 theme: themeId,
+            }
+        };
+    });
+  }, [setPersistedState]);
+
+  const updateThemeColors = useCallback((themeId: string, colors: Partial<ThemeColors>) => {
+    setPersistedState(prev => ({
+        ...prev,
+        settings: {
+            ...prev.settings,
+            customColors: {
+                ...(prev.settings.customColors || {}),
+                [themeId]: colors,
+            }
+        }
+    }));
+  }, [setPersistedState]);
+
+  const resetThemeColors = useCallback((themeId: string) => {
+    setPersistedState(prev => {
+        const newCustomColors = { ...(prev.settings.customColors || {}) };
+        delete newCustomColors[themeId];
+        return {
+            ...prev,
+            settings: {
+                ...prev.settings,
+                customColors: newCustomColors,
             }
         };
     });
@@ -520,6 +551,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         activeCommandCenterId: newState.settings?.activeCommandCenterId,
         aiFeaturesEnabled: newState.settings?.aiFeaturesEnabled ?? true,
         geminiApiKey: newState.settings?.geminiApiKey || '',
+        customColors: newState.settings?.customColors || {},
       },
     };
     setPersistedState(importedState);
@@ -550,6 +582,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     deleteChart,
     toggleTheme,
     setTheme,
+    updateThemeColors,
+    resetThemeColors,
     toggleFont,
     setFont,
     importWorkspace,
