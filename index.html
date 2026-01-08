@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="theme-spotify-dark">
 <head>
@@ -58,6 +59,21 @@
             'spin-smooth': { /* Define spin keyframes */
                 from: { transform: 'rotate(0deg)' },
                 to: { transform: 'rotate(360deg)' },
+            },
+            'confetti-fall': {
+                '0%': { transform: 'translateY(-100vh) rotate(0deg) scale(1)', opacity: '1' },
+                '100%': { transform: 'translateY(100vh) rotate(720deg) scale(0.5)', opacity: '0' },
+            },
+            'shake': {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-8px)' },
+                '20%, 40%, 60%, 80%': { transform: 'translateX(8px)' },
+            },
+            'fade-in-out': {
+                '0%': { opacity: '0' },
+                '10%': { opacity: '1' },
+                '90%': { opacity: '1' },
+                '100%': { opacity: '0' },
             }
           },
         },
@@ -326,6 +342,26 @@
     .exporting-chart .modal-header-actions {
       display: none !important;
     }
+
+    /* Confetti Animation */
+    .confetti-particle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        animation: confetti-fall 3s ease-in-out forwards;
+        opacity: 0; /* Start invisible */
+    }
+
+    /* Error Shake Animation */
+    .error-overlay-animation {
+        animation: shake 0.5s ease-in-out 3; /* Shake 3 times */
+    }
+
+    /* Fade in and out for the entire animation overlay */
+    .fade-in-out-animation {
+        animation: fade-in-out 3s ease-out forwards;
+    }
   </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -347,7 +383,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-BdQYPDkr.js"></script>
+  <script type="module" crossorigin src="/assets/index-CrBKGC76.js"></script>
 </head>
 <body class="bg-background">
   <div id="splash-screen">
