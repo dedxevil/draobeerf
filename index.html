@@ -1,28 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en" class="theme-spotify-dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Freeboard: AI-Powered Dashboard Creator</title>
-  
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z39JKLS2L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-6Z39JKLS2L');
   </script>
-  
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Freeboard is a free, serverless BI tool and alternative to Tableau & Geckoboard. Connect directly to Salesforce, Supabase, or any API to build AI-powered dashboards. Visualize CRM data, create charts, and get automated insights without a backend. Privacy-focused and local-first.">
-  <meta name="keywords" content="freeboard, salesforce dashboard, tableau alternative, crm analytics, business intelligence, bi tool, geckoboard alternative, free dashboard, dashboard creator, data visualization, client-side dashboard, serverless dashboard, no-backend, Supabase dashboard, Neon dashboard, PostgREST, REST API, AI assistant, Gemini API, local storage, privacy-focused, real-time dashboard, chart builder, KPI dashboard, databox alternative, klipfolio alternative, metabase alternative, power bi alternative">
-  
+  <meta name="description"
+    content="Freeboard is a free, serverless BI tool and alternative to Tableau & Geckoboard. Connect directly to Salesforce, Supabase, or any API to build AI-powered dashboards. Visualize CRM data, create charts, and get automated insights without a backend. Privacy-focused and local-first.">
+  <meta name="keywords"
+    content="freeboard, salesforce dashboard, tableau alternative, crm analytics, business intelligence, bi tool, geckoboard alternative, free dashboard, dashboard creator, data visualization, client-side dashboard, serverless dashboard, no-backend, Supabase dashboard, Neon dashboard, PostgREST, REST API, AI assistant, Gemini API, local storage, privacy-focused, real-time dashboard, chart builder, KPI dashboard, databox alternative, klipfolio alternative, metabase alternative, power bi alternative">
+
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='50' height='50' zoomAndPan='magnify' viewBox='0 0 375 374.999991' preserveAspectRatio='xMidYMid meet' version='1.0'%3E%3Cdefs%3E%3CclipPath id='f510c47a6b'%3E%3Cpath d='M 33 134 L 212.25 134 L 212.25 240.925781 L 33 240.925781 Z M 33 134 ' clip-rule='nonzero'/%3E%3E%3C/clipPath%3E%3CclipPath id='8377bd0006'%3E%3Cpath d='M 123 0 L 212.25 0 L 212.25 135 L 123 135 Z M 123 0 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='2551ec42cd'%3E%3Cpath d='M 173.890625 134.316406 L 353.140625 134.316406 L 353.140625 375 L 173.890625 375 Z M 173.890625 134.316406 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='8154aa9c62'%3E%3Cpath d='M 0.890625 0.316406 L 180.140625 0.316406 L 180.140625 107 L 0.890625 107 Z M 0.890625 0.316406 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='7ebede25d9'%3E%3Cpath d='M 0.890625 106 L 91 106 L 91 241 L 0.890625 241 Z M 0.890625 106 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='e409b74c3c'%3E%3Crect x='0' y='0' width='181' height='241'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23f510c47a6b)'%3E%3Cpath fill='%230fd76a' d='M 443.636719 285.234375 L 381.136719 214.578125 C 380 213.292969 377.976562 213.429688 376.988281 214.828125 C 351.664062 250.589844 309.96875 273.9375 262.8125 273.9375 C 186.46875 273.9375 124.414062 212.746094 123.015625 136.734375 C 122.992188 135.285156 121.828125 134.121094 120.378906 134.121094 L 35.6875 134.121094 C 34.214844 134.121094 33.011719 135.324219 33.027344 136.796875 C 34.460938 265.039062 138.863281 368.550781 267.445312 368.550781 C 337.683594 368.550781 400.703125 337.675781 443.65625 288.734375 C 444.53125 287.734375 444.523438 286.230469 443.636719 285.234375 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%238377bd0006)'%3E%3Cpath fill='%230fd76a' d='M 125.675781 134.121094 L 210.390625 134.121094 C 211.792969 134.121094 212.96875 133.027344 213.03125 131.628906 C 214.332031 102.703125 238.199219 79.632812 267.445312 79.632812 C 288.820312 79.632812 307.332031 91.957031 316.25 109.886719 C 317.089844 111.574219 319.347656 111.914062 320.597656 110.5 L 372.867188 51.40625 C 373.710938 50.453125 373.769531 49.027344 372.984375 48.023438 C 347.402344 15.304688 307.558594 -5.710938 262.8125 -5.710938 C 186.488281 -5.710938 124.449219 55.441406 123.019531 131.433594 C 122.992188 132.910156 124.199219 134.121094 125.675781 134.121094 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%232551ec42cd)'%3E%3Cg transform='matrix(1, 0, 0, 1, 173, 134)'%3E%3Cg clip-path='url(%23e409b74c3c)'%3E%3Cg clip-path='url(%238154aa9c62)'%3E%3Cpath fill='%230fd76a' d='M -230.320312 -44.234375 L -167.820312 26.421875 C -166.683594 27.703125 -164.660156 27.570312 -163.667969 26.171875 C -138.347656 -9.589844 -96.652344 -32.9375 -49.496094 -32.9375 C 26.847656 -32.9375 88.902344 28.253906 90.300781 104.261719 C 90.328125 105.714844 91.488281 106.878906 92.9375 106.878906 L 177.628906 106.878906 C 179.101562 106.878906 180.304688 105.675781 180.289062 104.203125 C 178.855469 -24.039062 74.453125 -127.554688 -54.128906 -127.554688 C -124.367188 -127.554688 -187.386719 -96.675781 -230.339844 -47.738281 C -231.214844 -46.738281 -231.207031 -45.230469 -230.320312 -44.234375 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%237ebede25d9)'%3E%3Cpath fill='%230fd76a' d='M 87.640625 106.878906 L 2.925781 106.878906 C 1.523438 106.878906 0.347656 107.96875 0.285156 109.367188 C -1.015625 138.296875 -24.878906 161.367188 -54.128906 161.367188 C -75.503906 161.367188 -94.015625 149.039062 -102.933594 131.113281 C -103.773438 129.425781 -106.03125 129.085938 -107.28125 130.5 L -159.550781 189.589844 C -160.394531 190.542969 -160.449219 191.972656 -159.667969 192.972656 C -134.085938 225.691406 -94.238281 246.710938 -49.496094 246.710938 C 26.828125 246.710938 88.867188 185.558594 90.296875 109.5625 C 90.328125 108.089844 89.117188 106.878906 87.640625 106.878906 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
-  
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='50' height='50' zoomAndPan='magnify' viewBox='0 0 375 374.999991' preserveAspectRatio='xMidYMid meet' version='1.0'%3E%3Cdefs%3E%3CclipPath id='f510c47a6b'%3E%3Cpath d='M 33 134 L 212.25 134 L 212.25 240.925781 L 33 240.925781 Z M 33 134 ' clip-rule='nonzero'/%3E%3E%3C/clipPath%3E%3CclipPath id='8377bd0006'%3E%3Cpath d='M 123 0 L 212.25 0 L 212.25 135 L 123 135 Z M 123 0 ' clip-rule='nonzero'/%3E%3E%3C/clipPath%3E%3CclipPath id='2551ec42cd'%3E%3Cpath d='M 173.890625 134.316406 L 353.140625 134.316406 L 353.140625 375 L 173.890625 375 Z M 173.890625 134.316406 ' clip-rule='nonzero'/%3E%3E%3C/clipPath%3E%3CclipPath id='8154aa9c62'%3E%3Cpath d='M 0.890625 0.316406 L 180.140625 0.316406 L 180.140625 107 L 0.890625 107 Z M 0.890625 0.316406 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='7ebede25d9'%3E%3Cpath d='M 0.890625 106 L 91 106 L 91 241 L 0.890625 241 Z M 0.890625 106 ' clip-rule='nonzero'/%3E%3C/clipPath%3E%3CclipPath id='e409b74c3c'%3E%3Crect x='0' y='0' width='181' height='241'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23f510c47a6b)'%3E%3Cpath fill='%230fd76a' d='M 443.636719 285.234375 L 381.136719 214.578125 C 380 213.292969 377.976562 213.429688 376.988281 214.828125 C 351.664062 250.589844 309.96875 273.9375 262.8125 273.9375 C 186.46875 273.9375 124.414062 212.746094 123.015625 136.734375 C 122.992188 135.285156 121.828125 134.121094 120.378906 134.121094 L 35.6875 134.121094 C 34.214844 134.121094 33.011719 135.324219 33.027344 136.796875 C 34.460938 265.039062 138.863281 368.550781 267.445312 368.550781 C 337.683594 368.550781 400.703125 337.675781 443.65625 288.734375 C 444.53125 287.734375 444.523438 286.230469 443.636719 285.234375 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%238377bd0006)'%3E%3Cpath fill='%230fd76a' d='M 125.675781 134.121094 L 210.390625 134.121094 C 211.792969 134.121094 212.96875 133.027344 213.03125 131.628906 C 214.332031 102.703125 238.199219 79.632812 267.445312 79.632812 C 288.820312 79.632812 307.332031 91.957031 316.25 109.886719 C 317.089844 111.574219 319.347656 111.914062 320.597656 110.5 L 372.867188 51.40625 C 373.710938 50.453125 373.769531 49.027344 372.984375 48.023438 C 347.402344 15.304688 307.558594 -5.710938 262.8125 -5.710938 C 186.488281 -5.710938 124.449219 55.441406 123.019531 131.433594 C 122.992188 132.910156 124.199219 134.121094 125.675781 134.121094 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%232551ec42cd)'%3E%3Cg transform='matrix(1, 0, 0, 1, 173, 134)'%3E%3Cg clip-path='url(%23e409b74c3c)'%3E%3Cg clip-path='url(%238154aa9c62)'%3E%3Cpath fill='%230fd76a' d='M -230.320312 -44.234375 L -167.820312 26.421875 C -166.683594 27.703125 -164.660156 27.570312 -163.667969 26.171875 C -138.347656 -9.589844 -96.652344 -32.9375 -49.496094 -32.9375 C 26.847656 -32.9375 88.902344 28.253906 90.300781 104.261719 C 90.328125 105.714844 91.488281 106.878906 92.9375 106.878906 L 177.628906 106.878906 C 179.101562 106.878906 180.304688 105.675781 180.289062 104.203125 C 178.855469 -24.039062 74.453125 -127.554688 -54.128906 -127.554688 C -124.367188 -127.554688 -187.386719 -96.675781 -230.339844 -47.738281 C -231.214844 -46.738281 -231.207031 -45.230469 -230.320312 -44.234375 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3Cg clip-path='url(%237ebede25d9)'%3E%3Cpath fill='%230fd76a' d='M 87.640625 106.878906 L 2.925781 106.878906 C 1.523438 106.878906 0.347656 107.96875 0.285156 109.367188 C -1.015625 138.296875 -24.878906 161.367188 -54.128906 161.367188 C -75.503906 161.367188 -94.015625 149.039062 -102.933594 131.113281 C -103.773438 129.425781 -106.03125 129.085938 -107.28125 130.5 L -159.550781 189.589844 C -160.394531 190.542969 -160.449219 191.972656 -159.667969 192.972656 C -134.085938 225.691406 -94.238281 246.710938 -49.496094 246.710938 C 26.828125 246.710938 88.867188 185.558594 90.296875 109.5625 C 90.328125 108.089844 89.117188 106.878906 87.640625 106.878906 ' fill-opacity='1' fill-rule='nonzero'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- Core Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -42,7 +49,7 @@
             'text-primary': 'var(--text-primary)',
             'text-secondary': 'var(--text-secondary)',
           },
-           animation: {
+          animation: {
             'toast-in': 'toast-in 0.3s ease-out forwards',
             'spin-smooth': 'spin-smooth 2s linear infinite', /* Added spin animation */
           },
@@ -58,23 +65,23 @@
               },
             },
             'spin-smooth': { /* Define spin keyframes */
-                from: { transform: 'rotate(0deg)' },
-                to: { transform: 'rotate(360deg)' },
+              from: { transform: 'rotate(0deg)' },
+              to: { transform: 'rotate(360deg)' },
             },
             'confetti-fall': {
-                '0%': { transform: 'translateY(-100vh) rotate(0deg) scale(1)', opacity: '1' },
-                '100%': { transform: 'translateY(100vh) rotate(720deg) scale(0.5)', opacity: '0' },
+              '0%': { transform: 'translateY(-100vh) rotate(0deg) scale(1)', opacity: '1' },
+              '100%': { transform: 'translateY(100vh) rotate(720deg) scale(0.5)', opacity: '0' },
             },
             'shake': {
-                '0%, 100%': { transform: 'translateX(0)' },
-                '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-8px)' },
-                '20%, 40%, 60%, 80%': { transform: 'translateX(8px)' },
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-8px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(8px)' },
             },
             'fade-in-out': {
-                '0%': { opacity: '0' },
-                '10%': { opacity: '1' },
-                '90%': { opacity: '1' },
-                '100%': { opacity: '0' },
+              '0%': { opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { opacity: '1' },
+              '100%': { opacity: '0' },
             }
           },
         },
@@ -91,6 +98,7 @@
       font-display: swap;
       src: url(https://fonts.gstatic.com/s/barlow/v18/7cHpv4kjgoGqM7E_DMs7.woff2) format('woff2');
     }
+
     @font-face {
       font-family: 'Barlow';
       font-style: normal;
@@ -98,6 +106,7 @@
       font-display: swap;
       src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfMv4A.woff2) format('woff2');
     }
+
     @font-face {
       font-family: 'Barlow';
       font-style: normal;
@@ -105,6 +114,7 @@
       font-display: swap;
       src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfO95A.woff2) format('woff2');
     }
+
     @font-face {
       font-family: 'Barlow';
       font-style: normal;
@@ -112,24 +122,101 @@
       font-display: swap;
       src: url(https://fonts.gstatic.com/s/barlow/v18/7cHqv4kjgoGqM7E_CfOA5A.woff2) format('woff2');
     }
-    
+
     /* Inter */
-    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2'); }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format('woff2');
+    }
+
     /* Roboto */
-    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2'); }
-    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc9.woff2) format('woff2'); }
-    @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.woff2) format('woff2'); }
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc9.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.woff2) format('woff2');
+    }
+
     /* Montserrat */
-    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format('woff2'); }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format('woff2');
+    }
+
     /* Rubik */
-    @font-face { font-family: 'Rubik'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(https://fonts.gstatic.com/s/rubik/v28/iJW-BXyIfDnIV5PU-A1Apms.woff2) format('woff2'); }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/rubik/v28/iJW-BXyIfDnIV5PU-A1Apms.woff2) format('woff2');
+    }
+
     /* Nunito */
-    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofINeaB.woff2) format('woff2'); }
-    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIO-aB.woff2) format('woff2'); }
-    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIAuaB.woff2) format('woff2'); }
-    @font-face { font-family: 'Nunito'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIS-aB.woff2) format('woff2'); }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofINeaB.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIO-aB.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIAuaB.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIS-aB.woff2) format('woff2');
+    }
+
     /* Quicksand */
-    @font-face { font-family: 'Quicksand'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(https://fonts.gstatic.com/s/quicksand/v31/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58a-wg.woff2) format('woff2');}
+    @font-face {
+      font-family: 'Quicksand';
+      font-style: normal;
+      font-weight: 300 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/quicksand/v31/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58a-wg.woff2) format('woff2');
+    }
+
     /* Spline Sans */
     @font-face {
       font-family: 'Spline Sans';
@@ -143,6 +230,7 @@
     html {
       --font-sans: 'Barlow';
     }
+
     html.theme-spotify-dark {
       --primary: #1DB954;
       --accent: #1A73E8;
@@ -152,6 +240,7 @@
       --text-primary: #FFFFFF;
       --text-secondary: #B3B3B3;
     }
+
     html.theme-msteams-dark {
       --primary: #6264A7;
       --accent: #7B7DBC;
@@ -161,6 +250,7 @@
       --text-primary: #FFFFFF;
       --text-secondary: #C8C8C8;
     }
+
     html.theme-discord-dark {
       --primary: #5865F2;
       --accent: #4E5EE2;
@@ -170,6 +260,7 @@
       --text-primary: #FFFFFF;
       --text-secondary: #B5BAC1;
     }
+
     html.theme-slack-dark {
       --primary: #ECB22E;
       --accent: #36C5F0;
@@ -179,6 +270,7 @@
       --text-primary: #D1D2D3;
       --text-secondary: #A0A1A2;
     }
+
     html.theme-twitter-dark {
       --primary: #1D9BF0;
       --accent: #FFD400;
@@ -188,6 +280,7 @@
       --text-primary: #E7E9EA;
       --text-secondary: #71767B;
     }
+
     html.theme-google-light {
       --primary: #1A73E8;
       --accent: #D93025;
@@ -197,6 +290,7 @@
       --text-primary: #202124;
       --text-secondary: #5F6368;
     }
+
     html.theme-notion-light {
       --primary: #37352F;
       --accent: #E03E3E;
@@ -206,6 +300,7 @@
       --text-primary: #37352F;
       --text-secondary: #9B9A97;
     }
+
     html.theme-amazon-light {
       --primary: #FF9900;
       --accent: #0073BB;
@@ -221,38 +316,54 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
     /* Fix for browser autofill styles */
     input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px var(--secondary) inset !important;
-        -webkit-text-fill-color: var(--text-primary) !important;
-        caret-color: var(--text-primary) !important;
+      -webkit-box-shadow: 0 0 0 30px var(--secondary) inset !important;
+      -webkit-text-fill-color: var(--text-primary) !important;
+      caret-color: var(--text-primary) !important;
     }
+
     /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
     .freeboard-scrollbar::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
+
     .freeboard-scrollbar::-webkit-scrollbar-track {
       background: var(--secondary);
       border-radius: 4px;
     }
+
     .freeboard-scrollbar::-webkit-scrollbar-thumb {
       background-color: var(--text-secondary);
       border-radius: 4px;
       border: 2px solid var(--secondary);
     }
+
     .freeboard-scrollbar::-webkit-scrollbar-thumb:hover {
       background-color: var(--primary);
     }
+
     /* Custom Scrollbar for Firefox */
     .freeboard-scrollbar {
       scrollbar-width: thin;
       scrollbar-color: var(--text-secondary) var(--secondary);
     }
-    
+
+    /* Fix Leaflet map tile display issues with Tailwind Preflight */
+    .leaflet-container .leaflet-overlay-pane svg,
+    .leaflet-container .leaflet-marker-pane img,
+    .leaflet-container .leaflet-shadow-pane img,
+    .leaflet-container .leaflet-tile-pane img,
+    .leaflet-container img.leaflet-image-layer {
+      max-width: none !important;
+      max-height: none !important;
+    }
+
     /* Splash Screen Styles */
     #splash-screen {
       position: fixed;
@@ -269,11 +380,13 @@
       visibility: visible;
       font-family: var(--font-sans), sans-serif;
     }
+
     #splash-screen.splash-hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
+
     .splash-content {
       display: flex;
       flex-direction: column;
@@ -283,58 +396,71 @@
       border: 1px solid var(--secondary);
       background-color: var(--surface);
       border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       width: 90%;
       max-width: 600px;
     }
+
     .splash-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
+
     .splash-header h1 {
-        font-size: 2.25rem;
-        font-weight: 700;
+      font-size: 2.25rem;
+      font-weight: 700;
     }
+
     .splash-credits {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.25rem 2rem;
-        list-style: none;
-        padding: 0;
-        margin: 1rem 0;
-        font-size: 0.75rem;
-        color: var(--text-secondary);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.25rem 2rem;
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
     }
+
     .splash-credits li {
-        text-align: left;
+      text-align: left;
     }
+
     .splash-footer {
-        font-size: 0.7rem;
-        color: var(--text-secondary);
-        margin-top: 1rem;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 1rem;
     }
+
     .splash-loader {
-        width: 100%;
-        height: 4px;
-        background-color: var(--secondary);
-        border-radius: 2px;
-        overflow: hidden;
-        margin-top: 1.5rem;
+      width: 100%;
+      height: 4px;
+      background-color: var(--secondary);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 1.5rem;
     }
+
     .splash-loader-bar {
-        width: 100%;
-        height: 100%;
-        background-color: var(--primary);
-        border-radius: 2px;
-        transform-origin: left;
-        animation-name: loading-bar;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary);
+      border-radius: 2px;
+      transform-origin: left;
+      animation-name: loading-bar;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
+
     @keyframes loading-bar {
-        from { transform: scaleX(0); }
-        to { transform: scaleX(1); }
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
     }
 
     /* Styles for PNG Export */
@@ -346,32 +472,35 @@
 
     /* Confetti Animation */
     .confetti-particle {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        animation: confetti-fall 3s ease-in-out forwards;
-        opacity: 0; /* Start invisible */
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: confetti-fall 3s ease-in-out forwards;
+      opacity: 0;
+      /* Start invisible */
     }
 
     /* Error Shake Animation */
     .error-overlay-animation {
-        animation: shake 0.5s ease-in-out 3; /* Shake 3 times */
+      animation: shake 0.5s ease-in-out 3;
+      /* Shake 3 times */
     }
 
     /* Fade in and out for the entire animation overlay */
     .fade-in-out-animation {
-        animation: fade-in-out 3s ease-out forwards;
+      animation: fade-in-out 3s ease-out forwards;
     }
   </style>
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<!-- Leaflet Marker Cluster CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-<link rel="stylesheet" href="/index.css">
-<script type="importmap">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- Leaflet Marker Cluster CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="/index.css">
+  <script type="importmap">
 {
   "imports": {
     "recharts": "https://esm.sh/recharts@^3.6.0",
@@ -394,101 +523,100 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-nvNaaKKI.js"></script>
+  <script type="module" crossorigin src="/assets/index-BlIow5OY.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-9Hbp8J6b.css">
 </head>
+
 <body class="bg-background">
   <div id="splash-screen">
     <div class="splash-content">
-        <div class="splash-header">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="50" height="50" viewBox="0 0 375 374.999991"
-     style="width: 3rem; height: 3rem;" class="animate-spin-smooth">
+      <div class="splash-header">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50"
+          viewBox="0 0 375 374.999991" style="width: 3rem; height: 3rem;" class="animate-spin-smooth">
 
-  <defs>
-    <clipPath id="html-splash-clip-1">
-      <path d="M 33 134 L 212.25 134 L 212.25 240.925781 L 33 240.925781 Z M 33 134"
-            clip-rule="nonzero"/>
-    </clipPath>
+          <defs>
+            <clipPath id="html-splash-clip-1">
+              <path d="M 33 134 L 212.25 134 L 212.25 240.925781 L 33 240.925781 Z M 33 134" clip-rule="nonzero" />
+            </clipPath>
 
-    <clipPath id="html-splash-clip-2">
-      <path d="M 123 0 L 212.25 0 L 212.25 135 L 123 135 Z M 123 0"
-            clip-rule="nonzero"/>
-    </clipPath>
+            <clipPath id="html-splash-clip-2">
+              <path d="M 123 0 L 212.25 0 L 212.25 135 L 123 135 Z M 123 0" clip-rule="nonzero" />
+            </clipPath>
 
-    <clipPath id="html-splash-clip-3">
-      <path d="M 173.890625 134.316406 L 353.140625 134.316406 L 353.140625 375 L 173.890625 375 Z M 173.890625 134.316406"
-            clip-rule="nonzero"/>
-    </clipPath>
+            <clipPath id="html-splash-clip-3">
+              <path
+                d="M 173.890625 134.316406 L 353.140625 134.316406 L 353.140625 375 L 173.890625 375 Z M 173.890625 134.316406"
+                clip-rule="nonzero" />
+            </clipPath>
 
-    <clipPath id="html-splash-clip-4">
-      <path d="M 0.890625 0.316406 L 180.140625 0.316406 L 180.140625 107 L 0.890625 107 Z M 0.890625 0.316406"
-            clip-rule="nonzero"/>
-    </clipPath>
+            <clipPath id="html-splash-clip-4">
+              <path d="M 0.890625 0.316406 L 180.140625 0.316406 L 180.140625 107 L 0.890625 107 Z M 0.890625 0.316406"
+                clip-rule="nonzero" />
+            </clipPath>
 
-    <clipPath id="html-splash-clip-5">
-      <path d="M 0.890625 106 L 91 106 L 91 241 L 0.890625 241 Z M 0.890625 106"
-            clip-rule="nonzero"/>
-    </clipPath>
+            <clipPath id="html-splash-clip-5">
+              <path d="M 0.890625 106 L 91 106 L 91 241 L 0.890625 241 Z M 0.890625 106" clip-rule="nonzero" />
+            </clipPath>
 
-    <clipPath id="html-splash-clip-6">
-      <rect x="0" y="0" width="181" height="241"/>
-    </clipPath>
-  </defs>
+            <clipPath id="html-splash-clip-6">
+              <rect x="0" y="0" width="181" height="241" />
+            </clipPath>
+          </defs>
 
-  <g clip-path="url(#html-splash-clip-1)">
-    <path fill="#0fd76a"
-          d="M 443.636719 285.234375 L 381.136719 214.578125 C 380 213.292969 377.976562 213.429688 376.988281 214.828125 C 351.664062 250.589844 309.96875 273.9375 262.8125 273.9375 C 186.46875 273.9375 124.414062 212.746094 123.015625 136.734375 C 122.992188 135.285156 121.828125 134.121094 120.378906 134.121094 L 35.6875 134.121094 C 34.214844 134.121094 33.011719 135.324219 33.027344 136.796875 C 34.460938 265.039062 138.863281 368.550781 267.445312 368.550781 C 337.683594 368.550781 400.703125 337.675781 443.65625 288.734375 C 444.53125 287.734375 444.523438 286.230469 443.636719 285.234375"
-          fill-rule="nonzero"/>
-  </g>
+          <g clip-path="url(#html-splash-clip-1)">
+            <path fill="#0fd76a"
+              d="M 443.636719 285.234375 L 381.136719 214.578125 C 380 213.292969 377.976562 213.429688 376.988281 214.828125 C 351.664062 250.589844 309.96875 273.9375 262.8125 273.9375 C 186.46875 273.9375 124.414062 212.746094 123.015625 136.734375 C 122.992188 135.285156 121.828125 134.121094 120.378906 134.121094 L 35.6875 134.121094 C 34.214844 134.121094 33.011719 135.324219 33.027344 136.796875 C 34.460938 265.039062 138.863281 368.550781 267.445312 368.550781 C 337.683594 368.550781 400.703125 337.675781 443.65625 288.734375 C 444.53125 287.734375 444.523438 286.230469 443.636719 285.234375"
+              fill-rule="nonzero" />
+          </g>
 
-  <g clip-path="url(#html-splash-clip-2)">
-    <path fill="#0fd76a"
-          d="M 125.675781 134.121094 L 210.390625 134.121094 C 211.792969 134.121094 212.96875 133.027344 213.03125 131.628906 C 214.332031 102.703125 238.199219 79.632812 267.445312 79.632812 C 288.820312 79.632812 307.332031 91.957031 316.25 109.886719 C 317.089844 111.574219 319.347656 111.914062 320.597656 110.5 L 372.867188 51.40625 C 373.710938 50.453125 373.769531 49.027344 372.984375 48.023438 C 347.402344 15.304688 307.558594 -5.710938 262.8125 -5.710938 C 186.488281 -5.710938 124.449219 55.441406 123.019531 131.433594 C 122.992188 132.910156 124.199219 134.121094 125.675781 134.121094"
-          fill-rule="nonzero"/>
-  </g>
+          <g clip-path="url(#html-splash-clip-2)">
+            <path fill="#0fd76a"
+              d="M 125.675781 134.121094 L 210.390625 134.121094 C 211.792969 134.121094 212.96875 133.027344 213.03125 131.628906 C 214.332031 102.703125 238.199219 79.632812 267.445312 79.632812 C 288.820312 79.632812 307.332031 91.957031 316.25 109.886719 C 317.089844 111.574219 319.347656 111.914062 320.597656 110.5 L 372.867188 51.40625 C 373.710938 50.453125 373.769531 49.027344 372.984375 48.023438 C 347.402344 15.304688 307.558594 -5.710938 262.8125 -5.710938 C 186.488281 -5.710938 124.449219 55.441406 123.019531 131.433594 C 122.992188 132.910156 124.199219 134.121094 125.675781 134.121094"
+              fill-rule="nonzero" />
+          </g>
 
-  <g clip-path="url(#html-splash-clip-3)">
-    <g transform="matrix(1, 0, 0, 1, 173, 134)">
-      <g clip-path="url(#html-splash-clip-6)">
-        <g clip-path="url(#html-splash-clip-4)">
-          <path fill="#0fd76a"
-                d="M -230.320312 -44.234375 L -167.820312 26.421875 C -166.683594 27.703125 -164.660156 27.570312 -163.667969 26.171875 C -138.347656 -9.589844 -96.652344 -32.9375 -49.496094 -32.9375 C 26.847656 -32.9375 88.902344 28.253906 90.300781 104.261719 C 90.328125 105.714844 91.488281 106.878906 92.9375 106.878906 L 177.628906 106.878906 C 179.101562 106.878906 180.304688 105.675781 180.289062 104.203125 C 178.855469 -24.039062 74.453125 -127.554688 -54.128906 -127.554688 C -124.367188 -127.554688 -187.386719 -96.675781 -230.339844 -47.738281 C -231.214844 -46.738281 -231.207031 -45.230469 -230.320312 -44.234375"
-                fill-rule="nonzero"/>
-        </g>
+          <g clip-path="url(#html-splash-clip-3)">
+            <g transform="matrix(1, 0, 0, 1, 173, 134)">
+              <g clip-path="url(#html-splash-clip-6)">
+                <g clip-path="url(#html-splash-clip-4)">
+                  <path fill="#0fd76a"
+                    d="M -230.320312 -44.234375 L -167.820312 26.421875 C -166.683594 27.703125 -164.660156 27.570312 -163.667969 26.171875 C -138.347656 -9.589844 -96.652344 -32.9375 -49.496094 -32.9375 C 26.847656 -32.9375 88.902344 28.253906 90.300781 104.261719 C 90.328125 105.714844 91.488281 106.878906 92.9375 106.878906 L 177.628906 106.878906 C 179.101562 106.878906 180.304688 105.675781 180.289062 104.203125 C 178.855469 -24.039062 74.453125 -127.554688 -54.128906 -127.554688 C -124.367188 -127.554688 -187.386719 -96.675781 -230.339844 -47.738281 C -231.214844 -46.738281 -231.207031 -45.230469 -230.320312 -44.234375"
+                    fill-rule="nonzero" />
+                </g>
 
-        <g clip-path="url(#html-splash-clip-5)">
-          <path fill="#0fd76a"
-                d="M 87.640625 106.878906 L 2.925781 106.878906 C 1.523438 106.878906 0.347656 107.96875 0.285156 109.367188 C -1.015625 138.296875 -24.878906 161.367188 -54.128906 161.367188 C -75.503906 161.367188 -94.015625 149.039062 -102.933594 131.113281 C -103.773438 129.425781 -106.03125 129.085938 -107.28125 130.5 L -159.550781 189.589844 C -160.394531 190.542969 -160.449219 191.972656 -159.667969 192.972656 C -134.085938 225.691406 -94.238281 246.710938 -49.496094 246.710938 C 26.828125 246.710938 88.867188 185.558594 90.296875 109.5625 C 90.328125 108.089844 89.117188 106.878906 87.640625 106.878906"
-                fill-rule="nonzero"/>
-        </g>
-      </g>
-    </g>
-  </g>
-</svg>
+                <g clip-path="url(#html-splash-clip-5)">
+                  <path fill="#0fd76a"
+                    d="M 87.640625 106.878906 L 2.925781 106.878906 C 1.523438 106.878906 0.347656 107.96875 0.285156 109.367188 C -1.015625 138.296875 -24.878906 161.367188 -54.128906 161.367188 C -75.503906 161.367188 -94.015625 149.039062 -102.933594 131.113281 C -103.773438 129.425781 -106.03125 129.085938 -107.28125 130.5 L -159.550781 189.589844 C -160.394531 190.542969 -160.449219 191.972656 -159.667969 192.972656 C -134.085938 225.691406 -94.238281 246.710938 -49.496094 246.710938 C 26.828125 246.710938 88.867188 185.558594 90.296875 109.5625 C 90.328125 108.089844 89.117188 106.878906 87.640625 106.878906"
+                    fill-rule="nonzero" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
 
-            <h1>Freeboard</h1>
-        </div>
-        <p class="text-text-secondary font-medium">Your Workspace is Loading...</p>
-        <div class="splash-loader">
-            <div class="splash-loader-bar" style="animation-duration: 1.5s;"></div>
-        </div>
-        <ul class="splash-credits">
-            <li>✓ Serverless by Design</li>
-            <li>✓ Privacy Focused</li>
-            <li>✓ AI-Powered Assistant</li>
-            <li>✓ Real-time Monitoring</li>
-            <li>✓ Secure Portability</li>
-            <li>✓ 100% Local Storage</li>
-        </ul>
-        <div class="splash-footer">
-            Powered by Gemini API
-        </div>
+        <h1>Freeboard</h1>
+      </div>
+      <p class="text-text-secondary font-medium">Your Workspace is Loading...</p>
+      <div class="splash-loader">
+        <div class="splash-loader-bar" style="animation-duration: 1.5s;"></div>
+      </div>
+      <ul class="splash-credits">
+        <li>✓ Serverless by Design</li>
+        <li>✓ Privacy Focused</li>
+        <li>✓ AI-Powered Assistant</li>
+        <li>✓ Real-time Monitoring</li>
+        <li>✓ Secure Portability</li>
+        <li>✓ 100% Local Storage</li>
+      </ul>
+      <div class="splash-footer">
+        Powered by Gemini API
+      </div>
     </div>
   </div>
   <div id="root"></div>
   <script>
     // Logic to hide splash screen once the app is ready
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       const splash = document.getElementById('splash-screen');
       // Delay slightly to ensure React has finished its initial render
       setTimeout(() => {
@@ -501,4 +629,5 @@
     });
   </script>
 </body>
+
 </html>
